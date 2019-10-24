@@ -51,7 +51,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/datadiri" />
+        app:srcCompat="@drawable/datdir" />
 
     <ImageButton
         android:id="@+id/btnDaftarKrs"
@@ -65,7 +65,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/list" />
+        app:srcCompat="@drawable/dafkrs" />
 
     <ImageButton
         android:id="@+id/btnLihatKelas"
@@ -77,6 +77,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnDaftarKrs"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kaca" />
+        app:srcCompat="@drawable/lihatkls" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
