@@ -39,7 +39,7 @@ public class HomeDosen extends AppCompatActivity {
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Toast.makeText(HomeDosen.this, "Tidak jadi logout",
-                                        Toast.LENGTH_SHORT).show();8\
+                                        Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
