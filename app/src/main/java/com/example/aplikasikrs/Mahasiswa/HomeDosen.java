@@ -38,7 +38,7 @@ public class HomeDosen extends AppCompatActivity {
                 builder.setMessage("Apakah anda yakin untuk logout ?")
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(HomeDosen.this, "Tidak jadi logout",
+                                Toast.makeText(HomeDosen.this, "Tidak logout",
                                         Toast.LENGTH_SHORT).show();
                             }
                         })
