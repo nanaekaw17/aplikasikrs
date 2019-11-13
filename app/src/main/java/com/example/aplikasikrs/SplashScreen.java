@@ -28,16 +28,17 @@ public class SplashScreen extends AppCompatActivity {
         SharedPreferences prefs = SplashScreen.this.getSharedPreferences("prefs_file", MODE_PRIVATE);
         String statusLogin = prefs.getString("isLogin", null);
         if (statusLogin != null) {
-            if (statusLogin.equals("Mahasiswa")) ;
-            Intent intent = new Intent(SplashScreen.this, HomeDosen.class);
-            startActivity(intent);
+            if (statusLogin.equals("Mahasiswa")) {
+                Intent intent = new Intent(SplashScreen.this, HomeDosen.class);
+                startActivity(intent);
+            } else if (statusLogin.equals("Dosen")) {
 
-        } else if (statusLogin.equals("Admin")) {
+                Intent intent = new Intent(SplashScreen.this, HomeAdmin.class);
+                startActivity(intent);
 
-            Intent intent = new Intent(SplashScreen.this, HomeAdmin.class);
-            startActivity(intent);
-
-        } else {
+            }
+        }
+          else {
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
