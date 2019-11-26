@@ -71,12 +71,12 @@ public class MainActivity extends AppCompatActivity {
                 edit.commit();
 
                 Intent intent = new Intent(MainActivity.this, HomeDosen.class);
-                startActivity(intent);
+                startActivity(intent);}
 
-            } else {
-                Toast toast = Toast.makeText(getApplicationContext(), "Bukan Email milik UKDW", Toast.LENGTH_LONG);
-
-            }
+//            } else {
+//                Toast toast = Toast.makeText(getApplicationContext(), "Bukan Email milik UKDW", Toast.LENGTH_LONG);
+//
+//            }
         }
 
     };

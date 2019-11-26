@@ -1,20 +1,48 @@
 package com.example.aplikasikrs.Admin.Model;
 
-public class Dosen {
-    private String nidn;
-    private String namaDosen;
-    private String gelar;
-    private String email;
-    private String alamat;
-    private int foto;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public Dosen(String nidn, String namaDosen, String gelar, String email, String alamat, int foto) {
+public class  Dosen {
+
+    @SerializedName("id")
+    @Expose
+    private String id;
+
+    @SerializedName("nidn")
+    @Expose
+    private String nidn;
+
+    @SerializedName("namaDosen")
+    @Expose
+    private String namaDosen;
+
+    @SerializedName("gelar")
+    @Expose
+    private String gelar;
+
+    @SerializedName("email")
+    @Expose
+    private String email;
+
+    @SerializedName("alamat")
+    @Expose
+    private String alamat;
+
+    @SerializedName("foto")
+    @Expose
+    private String foto;
+
+
+    public Dosen(String id, String nidn, String namaDosen, String gelar, String email, String alamat, String foto) {
+        this.id = id;
         this.nidn = nidn;
         this.namaDosen = namaDosen;
         this.gelar = gelar;
         this.email = email;
         this.alamat = alamat;
         this.foto = foto;
+
     }
     public String getNidn() {
         return nidn;
@@ -56,11 +84,15 @@ public class Dosen {
         this.alamat = alamat;
     }
 
-    public int getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(int foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
+
+    public String getId() { return id; }
+
+    public void setId(String id) { this.id = id; }
 }
