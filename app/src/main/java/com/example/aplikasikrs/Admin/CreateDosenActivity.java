@@ -123,41 +123,41 @@ public class CreateDosenActivity extends AppCompatActivity {
         }
         edit_dosen.setOnClickListener(new View.OnClickListener() {
 
-                                          @Override
-                                          public void onClick(View view) {
-                                              if (!isUpdate) {
-                                                  AlertDialog.Builder builder = new AlertDialog.Builder(CreateDosenActivity.this);
-                                                  builder.setMessage("Apakahh anda yakin untuk menyimpan ??")
-                                                          .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                                              public void onClick(DialogInterface dialog, int which) {
-                                                                  Toast.makeText(CreateDosenActivity.this, "Tidak Menyimpan", Toast.LENGTH_SHORT).show();
-                                                              }
-                                                          })
-                                                          .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                                              public void onClick(DialogInterface dialog, int which) {
-                                                                  addData();
-                                                              }
-                                                          });
-                                                  AlertDialog dialog = builder.create();
-                                                  dialog.show();
-                                              } else {
-                                                  AlertDialog.Builder builder = new AlertDialog.Builder(CreateDosenActivity.this);
-                                                  builder.setMessage("Apakahh anda yakin untuk menyimpan ??")
-                                                          .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                                              public void onClick(DialogInterface dialog, int which) {
-                                                                  Toast.makeText(CreateDosenActivity.this, "Tidak Menyimpan", Toast.LENGTH_SHORT).show();
-                                                              }
-                                                          })
-                                                          .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                                              public void onClick(DialogInterface dialog, int which) {
-                                                                  update_dosen();
-                                                              }
-                                                          });
-                                                  AlertDialog dialog = builder.create();
-                                                  dialog.show();
-                                              }
-                                          }
-                                      }
+            @Override
+            public void onClick(View view) {
+                if (!isUpdate) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CreateDosenActivity.this);
+                    builder.setMessage("Apakahh anda yakin untuk menyimpan ??")
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(CreateDosenActivity.this, "Tidak Menyimpan", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    addData();
+                                }
+                            });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CreateDosenActivity.this);
+                    builder.setMessage("Apakahh anda yakin untuk menyimpan ??")
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(CreateDosenActivity.this, "Tidak Menyimpan", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    update_dosen();
+                                }
+                            });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            }
+        }
         );
 
     }
