@@ -2,6 +2,7 @@ package com.example.aplikasikrs.Admin.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,9 @@ public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder> 
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{ //utk menghubungkan dari txt
+    public class ViewHolder extends RecyclerView.ViewHolder
+        implements View.OnCreateContextMenuListener{ //utk menghubungkan dari txt
+
         private TextView txtNidn, txtNamaDosen, txtGelar, txtAlamat, txtEmail;
         private ImageView imgFoto;
         private CardView cv;
@@ -82,6 +85,14 @@ public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder> 
             txtEmail = view.findViewById(R.id.txtEmail);
             imgFoto = view.findViewById(R.id.imgFotoDosen);
             cv = view.findViewById(R.id.cardViewDosen);
+            view.setOnCreateContextMenuListener(this);
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            contextMenu.setHeaderTitle("Pilih Aksi");
+            contextMenu.add(this.getAdapterPosition(), view.getId(), 0 , "Ubah Data Dosen");
+            contextMenu.add(this.getAdapterPosition(), view.getId(),0 ,"Hapus Data Dosen");
         }
     }
 }
