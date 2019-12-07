@@ -3,17 +3,13 @@ package com.example.aplikasikrs.Admin.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class  Dosen {
-
-    @SerializedName("id")
-    @Expose
-    private String id;
+public class Dosen {
 
     @SerializedName("nidn")
     @Expose
     private String nidn;
 
-    @SerializedName("namaDosen")
+    @SerializedName("nama")
     @Expose
     private String namaDosen;
 
@@ -33,17 +29,25 @@ public class  Dosen {
     @Expose
     private String foto;
 
+    @SerializedName("id")
+    @Expose
+    private String id;
 
-    public Dosen(String id, String nidn, String namaDosen, String gelar, String email, String alamat, String foto) {
-        this.id = id;
+    @SerializedName("nim_progmob")
+    @Expose
+    private String nim;
+
+    public Dosen(String nidn, String namaDosen, String gelar, String email, String alamat, String foto, String id, String nim) {
         this.nidn = nidn;
         this.namaDosen = namaDosen;
         this.gelar = gelar;
         this.email = email;
         this.alamat = alamat;
         this.foto = foto;
-
+        this.id = id;
+        this.nim = nim;
     }
+
     public String getNidn() {
         return nidn;
     }
@@ -92,7 +96,19 @@ public class  Dosen {
         this.foto = foto;
     }
 
-    public String getId() { return id; }
+    public String getId() {
+        return id;
+    }
 
-    public void setId(String id) { this.id = id; }
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNim() {
+        return nim;
+    }
+
+    public void setNim(String nim) {
+        this.nim = nim;
+    }
 }

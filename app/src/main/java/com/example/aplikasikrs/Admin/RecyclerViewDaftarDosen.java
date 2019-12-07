@@ -1,35 +1,30 @@
 package com.example.aplikasikrs.Admin;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.aplikasikrs.Admin.Adapter.DosenAdapter;
-import com.example.aplikasikrs.Admin.Model.DefaultResult;
 import com.example.aplikasikrs.Admin.Model.Dosen;
-import com.example.aplikasikrs.MainActivity;
+import com.example.aplikasikrs.Network.DefaultResult;
+import com.example.aplikasikrs.Network.GetDataService;
+import com.example.aplikasikrs.Network.RetrofitClientInstance;
 import com.example.aplikasikrs.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import com.example.aplikasikrs.Network.GetDataService;
-import com.example.aplikasikrs.Network.RetrofitClientInstance;
 
 
 public class RecyclerViewDaftarDosen extends AppCompatActivity {
@@ -54,29 +49,30 @@ public class RecyclerViewDaftarDosen extends AppCompatActivity {
         }
         return  true;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view_daftar_dosen);
-
-        recyclerView = (RecyclerView) findViewById(R.id.rvDosen);
-
         this.setTitle("SI KRS - Hai Admin");
-//        tambahData();
-        progressDialog = new ProgressDialog(RecyclerViewDaftarDosen.this);
+
+        recyclerView = (RecyclerView)findViewById(R.id.rvDosen);
+        //tambahData();
+        //addData
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<ArrayList<Dosen>> call = service.getDosenAll("72170090");
+        Call<ArrayList<Dosen>> call = service.getDosenAll("72170177");
         call.enqueue(new Callback<ArrayList<Dosen>>() {
             @Override
             public void onResponse(Call<ArrayList<Dosen>> call, Response<ArrayList<Dosen>> response) {
                 progressDialog.dismiss();
 
-                recyclerView = (RecyclerView) findViewById(R.id.rvDosen);
                 dosenList = response.body();
                 dosenAdapter = new DosenAdapter(response.body());
+
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RecyclerViewDaftarDosen.this);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(dosenAdapter);
@@ -85,85 +81,62 @@ public class RecyclerViewDaftarDosen extends AppCompatActivity {
             @Override
             public void onFailure(Call<ArrayList<Dosen>> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(RecyclerViewDaftarDosen.this, "Login gagal. Mohon dicoba kembali ", Toast.LENGTH_LONG);
-
+                Toast.makeText(RecyclerViewDaftarDosen.this,"Error",Toast.LENGTH_SHORT);
             }
         });
 
         registerForContextMenu(recyclerView);
 
     }
+
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         Dosen dosen = dosenList.get(item.getGroupId());
-        if (item.getTitle() == "Ubah Data Dosen") {
+        if (item.getTitle()== "Ubah Data Dosen"){
             Intent intent = new Intent(RecyclerViewDaftarDosen.this, CreateDosenActivity.class);
-            intent.putExtra("id_dosen", dosen.getId());
-            intent.putExtra("nama_dosen", dosen.getNamaDosen());
-            intent.putExtra("alamat_dosen", dosen.getAlamat());
-            intent.putExtra("email_dosen", dosen.getEmail());
-            intent.putExtra("gelar", dosen.getGelar());
-            intent.putExtra("foto", dosen.getFoto());
-            intent.putExtra("is_update", true);
+            intent.putExtra("id_dosen",dosen.getId()); //(key, value) -> ketika manggil Dosen harus sama
+            intent.putExtra("nama",dosen.getNamaDosen());
+            intent.putExtra("nidn",dosen.getNidn());
+            intent.putExtra("alamat",dosen.getAlamat());
+            intent.putExtra("email",dosen.getEmail());
+            intent.putExtra("gelar",dosen.getGelar());
+            intent.putExtra("foto",dosen.getFoto());
+            intent.putExtra("is_update",true);
             startActivity(intent);
-        } else if (item.getTitle() == "Hapus Data Dosen") {
+
+        }else if(item.getTitle() == "Hapus Data Dosen"){
+            //Toast.makeText(RecyclerViewDaftarDosen.this,"Hapus",Toast.LENGTH_LONG).show();
+
             progressDialog = new ProgressDialog(RecyclerViewDaftarDosen.this);
             progressDialog.show();
 
             GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
             Call<DefaultResult> call = service.delete_dosen(
-                    dosen.getId(), "72170090"
-            );
+                    dosen.getId(), "72170090");
             call.enqueue(new Callback<DefaultResult>() {
                 @Override
                 public void onResponse(Call<DefaultResult> call, Response<DefaultResult> response) {
                     progressDialog.dismiss();
-                    Toast.makeText(RecyclerViewDaftarDosen.this, "Berhasil Hapus Dosen", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(RecyclerViewDaftarDosen.this, RecyclerViewDaftarDosen.class);
-                    finish();
-                    startActivity(i);
-
+                    Toast.makeText(RecyclerViewDaftarDosen.this,"Berhasil Menghapus",Toast.LENGTH_SHORT).show();
+                    recreate();
                 }
 
                 @Override
                 public void onFailure(Call<DefaultResult> call, Throwable t) {
                     progressDialog.dismiss();
-                    Toast.makeText(RecyclerViewDaftarDosen.this, "Gagal Hapus Dosen, Coba Lagi", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RecyclerViewDaftarDosen.this,"Gagal Hapus",Toast.LENGTH_SHORT).show();
                 }
             });
-
         }
+
         return super.onContextItemSelected(item);
     }
-    @Override
-    protected void onRestart() {
-        super.onRestart();
 
-        progressDialog = new ProgressDialog(RecyclerViewDaftarDosen.this);
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
-
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<ArrayList<Dosen>> call = service.getDosenAll("72170090");
-        call.enqueue(new Callback<ArrayList<Dosen>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Dosen>> call, Response<ArrayList<Dosen>> response) {
-                progressDialog.dismiss();
-
-                recyclerView = (RecyclerView) findViewById(R.id.rvDosen);
-                dosenList = response.body();
-                dosenAdapter = new DosenAdapter(response.body());
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RecyclerViewDaftarDosen.this);
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(dosenAdapter);
-            }
-            @Override
-            public void onFailure(Call<ArrayList<Dosen>> call, Throwable t) {
-                progressDialog.dismiss();
-                Toast.makeText(RecyclerViewDaftarDosen.this, "Login gagal. Mohon dicoba kembali ", Toast.LENGTH_LONG);
-
-            }
-        });
-    }
+    //Data Dummy
+    /* private void tambahData(){
+        dosenList = new ArrayList<>();
+        dosenList.add(new Dosen("001","77777","Jong Jek Siang", "Proffesor","jjs@staff.ukdw.ac.id","Jl. Magelang",R.drawable.logo));
+        dosenList.add(new Dosen("001","77777","Jong Jek Siang", "Proffesor","jjs@staff.ukdw.ac.id","Jl. Magelang",R.drawable.logo));
+        dosenList.add(new Dosen("001","77777","Jong Jek Siang", "Proffesor","jjs@staff.ukdw.ac.id","Jl. Magelang",R.drawable.logo));
+    }*/
 }
-

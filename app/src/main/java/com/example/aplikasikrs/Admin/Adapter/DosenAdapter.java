@@ -1,7 +1,6 @@
 package com.example.aplikasikrs.Admin.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aplikasikrs.Admin.CreateDosenActivity;
 import com.example.aplikasikrs.Admin.Model.Dosen;
 import com.example.aplikasikrs.R;
 import com.squareup.picasso.Picasso;
@@ -38,29 +36,32 @@ public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) { //gunanya utk memasukkan data
-//        URL url = new URL("http://image10.bizrate-images.com/resize?sq");
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) { //gunanya utk memasukkan data
+
         holder.txtNidn.setText(dataList.get(position).getNidn());
         holder.txtNamaDosen.setText(dataList.get(position).getNamaDosen());
         holder.txtGelar.setText(dataList.get(position).getGelar());
         holder.txtAlamat.setText(dataList.get(position).getAlamat());
         holder.txtEmail.setText(dataList.get(position).getEmail());
-//        holder.imgFoto.setImageResource(dataList.get(position).getFoto());
-        holder.imgFoto.getLayoutParams().width = 100;
-        holder.imgFoto.getLayoutParams().height = 100;
-        if (dataList.get(position).getFoto() !=null){
+        holder.imgFoto.getLayoutParams().width = 200;
+        holder.imgFoto.getLayoutParams().height = 200;
+        if(dataList.get(position).getFoto() != null){
             Picasso.with(this.context)
-                    .load(dataList.get(position).getFoto())
+                    .load("https://kpsi.fti.ukdw.ac.id/progmob/"+dataList.get(position).getFoto())
                     .into(holder.imgFoto);
         }
-        holder.cv.setOnClickListener(new View.OnClickListener() {
+        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(context != null){
-                Intent intent = new Intent(context, CreateDosenActivity.class);
-                context.startActivity(intent);}
-            }
-        });
+                Intent intent = new Intent(view.getContext(), CreateDosenActivity.class);
+                intent.putExtra("id",dataList.get(position).getId());
+                intent.putExtra("nama",dataList.get(position).getNamaDosen());
+                intent.putExtra("nidn",dataList.get(position).getNidn());
+                intent.putExtra("alamat",dataList.get(position).getAlamat());
+                intent.putExtra("email",dataList.get(position).getEmail());
+                intent.putExtra("gelar",dataList.get(position).getGelar());
+                view.getContext().startActivity(intent);}
+        });*/
     }
 
     @Override
@@ -70,8 +71,7 @@ public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder> 
 
 
     public class ViewHolder extends RecyclerView.ViewHolder
-        implements View.OnCreateContextMenuListener{ //utk menghubungkan dari txt
-
+            implements View.OnCreateContextMenuListener{ //utk menghubungkan dari txt
         private TextView txtNidn, txtNamaDosen, txtGelar, txtAlamat, txtEmail;
         private ImageView imgFoto;
         private CardView cv;
@@ -84,15 +84,15 @@ public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder> 
             txtAlamat = view.findViewById(R.id.txtAlamat);
             txtEmail = view.findViewById(R.id.txtEmail);
             imgFoto = view.findViewById(R.id.imgFotoDosen);
-            cv = view.findViewById(R.id.cardViewDosen);
+            //cv = view.findViewById(R.id.cardViewDosen);
             view.setOnCreateContextMenuListener(this);
         }
 
         @Override
-        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
-            contextMenu.setHeaderTitle("Pilih Aksi");
-            contextMenu.add(this.getAdapterPosition(), view.getId(), 0 , "Ubah Data Dosen");
-            contextMenu.add(this.getAdapterPosition(), view.getId(),0 ,"Hapus Data Dosen");
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.setHeaderTitle("Pilih Aksi");
+            menu.add(this.getAdapterPosition(), v.getId(),0,"Ubah Data Dosen");
+            menu.add(this.getAdapterPosition(), v.getId(),0,"Hapus Data Dosen");
         }
     }
 }

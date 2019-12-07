@@ -1,34 +1,32 @@
 package com.example.aplikasikrs.Network;
 
-import com.example.aplikasikrs.Admin.Model.DefaultResult;
 import com.example.aplikasikrs.Admin.Model.Dosen;
 
 import java.util.ArrayList;
-import java.util.List;
 
-//import com.example.aplikasikrs.Model.DefaultResult;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
+
+//import aplikasikrs.com.aplikasikrs.Model.DefaultResult;
 
 public interface GetDataService {
 
-    @GET("/api/progmob/dosen/{nim_progmob}")
-    Call<ArrayList<Dosen>> getDosenAll(@Path("nim_progmob") String nim_progmob);
-
-//    Call<DefaultResult> insert_dosen(String toString, String toString1, String toString2, String toString3, String toString4, String s, String s1);
-//    //Call<List<Dosen>> getDosenAll(@Query("nim_progmob") String nim_progmob);
-
     @FormUrlEncoded
-    @POST("/api/progmob/dosen/delete")
+    @POST("api/progmob/dosen/delete")
     Call<DefaultResult> delete_dosen(
             @Field("id") String id,
             @Field("nim_progmob") String nim_progmob
     );
+
+    @GET("/api/progmob/dosen/{nim_progmob}")
+    Call<ArrayList<Dosen>> getDosenAll(@Path("nim_progmob") String nim_progmob);
+    //Call<List<Dosen>> getDosenAll(@Query("nim_progmob") String nim_progmob);
+
+    @FormUrlEncoded
     @POST("/api/progmob/dosen/create")
     Call<DefaultResult> insert_dosen(
             @Field("nama") String nama,
@@ -39,6 +37,19 @@ public interface GetDataService {
             @Field("foto") String foto,
             @Field("nim_progmob") String nim_progmob
     );
+
+    @FormUrlEncoded
+    @POST("/api/progmob/dosen/createfoto")
+    Call<DefaultResult> insert_dosen_foto(
+            @Field("nama") String nama,
+            @Field("nidn") String nidn,
+            @Field("alamat") String alamat,
+            @Field("email") String email,
+            @Field("gelar") String gelar,
+            @Field("foto") String foto,
+            @Field("nim_progmob") String nim_progmob
+    );
+
     @FormUrlEncoded
     @POST("api/progmob/dosen/update")
     Call<DefaultResult> update_dosen(
@@ -51,20 +62,10 @@ public interface GetDataService {
             @Field("foto") String foto,
             @Field("nim_progmob") String nim_progmob
     );
-    @FormUrlEncoded
-    @POST("api/progmob/dosen/createfoto")
-    Call<DefaultResult> Insert_foto(
-            @Field("nama") String nama,
-            @Field("nidn") String nidn,
-            @Field("alamat") String alamat,
-            @Field("email") String email,
-            @Field("gelar") String gelar,
-            @Field("foto") String foto,
-            @Field("nim_progmob") String nim_progmob
-    );
+
     @FormUrlEncoded
     @POST("api/progmob/dosen/updatewithfoto")
-    Call<DefaultResult>Update_foto_dosen(
+    Call<DefaultResult> update_dosen_foto(
             @Field("id") String id,
             @Field("nama") String nama,
             @Field("nidn") String nidn,
@@ -74,12 +75,6 @@ public interface GetDataService {
             @Field("foto") String foto,
             @Field("nim_progmob") String nim_progmob
     );
-
-    Call<DefaultResult> update_foto_dosen(String idDosen, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String s);
-
-
-
-
 
     /*@FormUrlEncoded
     @POST("/si_mapping/api/user_login.php")
