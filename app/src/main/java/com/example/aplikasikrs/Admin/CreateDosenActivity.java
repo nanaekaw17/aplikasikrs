@@ -182,7 +182,7 @@ public class CreateDosenActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<DefaultResult> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(CreateDosenActivity.this,"Error cuy",Toast.LENGTH_SHORT);
+                Toast.makeText(CreateDosenActivity.this,"Error",Toast.LENGTH_SHORT);
             }
         });
     }
