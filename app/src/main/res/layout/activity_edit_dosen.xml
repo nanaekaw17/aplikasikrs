@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <EditText
-        android:id="@+id/edtNamaDsn"
+        android:id="@+id/edtNamaMhs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -79,7 +79,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edtNidn"
+        android:id="@+id/edtNim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -88,10 +88,10 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/edtNamaDsn" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNamaMhs" />
 
     <EditText
-        android:id="@+id/edtEmailDsn"
+        android:id="@+id/edtEmailMhs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
@@ -100,7 +100,7 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/edtAlamatDsn" />
+        app:layout_constraintTop_toBottomOf="@+id/edtAlamatMhs" />
 
     <EditText
         android:id="@+id/edtGelar"
@@ -112,10 +112,10 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmailDsn" />
+        app:layout_constraintTop_toBottomOf="@+id/edtEmailMhs" />
 
     <EditText
-        android:id="@+id/edtAlamatDsn"
+        android:id="@+id/edtAlamatMhs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -124,10 +124,10 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/edtNidn" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNim" />
 
     <Button
-        android:id="@+id/btnBrowseFotoDosen"
+        android:id="@+id/btnBrowseFotoMhs"
         android:layout_width="82dp"
         android:layout_height="33dp"
         android:layout_marginStart="24dp"
@@ -163,7 +163,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBrowseFotoDosen" />
+        app:layout_constraintTop_toBottomOf="@+id/btnBrowseFotoMhs" />
 
     <EditText
         android:id="@+id/edtIdDosen"
@@ -176,7 +176,7 @@
         android:text="ID"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/edtNamaDsn"
+        app:layout_constraintStart_toEndOf="@+id/edtNamaMhs"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

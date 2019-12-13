@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <EditText
-        android:id="@+id/edtNamaDsn"
+        android:id="@+id/edtNamaMhs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="43dp"
@@ -49,7 +49,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edtNidn"
+        android:id="@+id/edtNim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -58,7 +58,7 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/edtNamaDsn" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNamaMhs" />
 
     <Button
         android:id="@+id/btnSimpanKrs"
@@ -80,5 +80,5 @@
         android:layout_marginTop="16dp"
         android:spinnerMode="dropdown"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/edtNidn" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNim" />
 </androidx.constraintlayout.widget.ConstraintLayout>

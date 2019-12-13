@@ -83,7 +83,7 @@ public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder> 
             txtGelar = view.findViewById(R.id.txtGelar);
             txtAlamat = view.findViewById(R.id.txtAlamat);
             txtEmail = view.findViewById(R.id.txtEmail);
-            imgFoto = view.findViewById(R.id.imgFotoDosen);
+            imgFoto = view.findViewById(R.id.imgFotoMhs);
             //cv = view.findViewById(R.id.cardViewDosen);
             view.setOnCreateContextMenuListener(this);
         }

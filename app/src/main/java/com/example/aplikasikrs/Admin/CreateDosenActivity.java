@@ -49,14 +49,14 @@ public class CreateDosenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_dosen);
         this.setTitle("SI KRS - Hai Admin");
-        edtNama = (EditText)findViewById(R.id.edtNamaDsn);
-        edtNidn = (EditText)findViewById(R.id.edtNidn);
-        edtAlamat = (EditText)findViewById(R.id.edtAlamatDsn);
-        edtEmail = (EditText)findViewById(R.id.edtEmailDsn);
+        edtNama = (EditText)findViewById(R.id.edtNamaMhs);
+        edtNidn = (EditText)findViewById(R.id.edtNim);
+        edtAlamat = (EditText)findViewById(R.id.edtAlamatMhs);
+        edtEmail = (EditText)findViewById(R.id.edtEmailMhs);
         edtGelar = (EditText)findViewById(R.id.edtGelar);
-        edtFoto = (EditText)findViewById(R.id.edtFoto);
-        imgFoto = (ImageView)findViewById(R.id.imgFotoDosen);
-        btnBrowse = (Button)findViewById(R.id.btnBrowseFotoDosen);
+        edtFoto = (EditText)findViewById(R.id.edtFotoMhs);
+        imgFoto = (ImageView)findViewById(R.id.imgFotoMhs);
+        btnBrowse = (Button)findViewById(R.id.btnBrowseFotoMhs);
 
         checkUpdate();
 //        Button btnDaftarKrs = (Button)findViewById(R.id.btnSimpanDosen);
@@ -68,7 +68,7 @@ public class CreateDosenActivity extends AppCompatActivity {
 //            }
 //        });
 
-        btnSave = (Button)findViewById(R.id.btnSimpanDosen);
+        btnSave = (Button)findViewById(R.id.btnSimpanDataMhs);
         if(isUpdate){
             btnSave.setText("Update");
         }

@@ -51,29 +51,33 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="16dp"
         android:text="@string/foto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        tools:layout_editor_absoluteY="269dp" />
+
+
+
+
+        <EditText
+
+            android:id="@+id/edtNamaMhs"
+            style="@android:style/Widget.Material.EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView14"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edtNamaMhs"
+        android:id="@+id/edtNim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/edtNimMhs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -103,29 +107,50 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/edtNimMhs" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNim" />
 
     <Button
-        android:id="@+id/btnBrowseFotoDosen"
+        android:id="@+id/btnBrowseFotoMhs"
         android:layout_width="82dp"
         android:layout_height="33dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="20dp"
         android:text="@string/browse"
         android:textSize="10sp"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmailMhs" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtFotoMhs" />
 
     <Button
-        android:id="@+id/btnCreateMhs"
+        android:id="@+id/btnSimpanDataMhs"
         android:layout_width="196dp"
         android:layout_height="35dp"
-        android:layout_marginTop="28dp"
-        android:background="#00BCD4"
+        android:layout_marginTop="52dp"
+        android:background="#D400B8"
         android:text="@string/simpan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBrowseFotoDosen" />
+        app:layout_constraintTop_toBottomOf="@+id/btnBrowseFotoMhs" />
 
+    <EditText
+        android:id="@+id/edtFotoMhs"
+        android:layout_width="175dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
+        tools:layout_editor_absoluteY="252dp" />
+
+    <ImageView
+        android:id="@+id/imgFotoMhs"
+        android:layout_width="147dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSimpanDataMhs"
+        app:srcCompat="@mipmap/ic_launcher" />
 </androidx.constraintlayout.widget.ConstraintLayout>

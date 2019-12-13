@@ -1,18 +1,48 @@
 package com.example.aplikasikrs.Admin.Model;
 
-public class Mahasiswa {
-    private String nim;
-    private String nama;
-    private String emailMhs;
-    private String alamatMhs;
-    private int fotoMhs;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public Mahasiswa(String nim, String nama, String emailMhs, String alamatMhs, int fotoMhs) {
+public class Mahasiswa {
+
+    @SerializedName("nama")
+    @Expose
+    private String namaMhs;
+
+    @SerializedName("email")
+    @Expose
+    private String emailMhs;
+
+    @SerializedName("alamat")
+    @Expose
+    private String alamatMhs;
+
+    @SerializedName("foto")
+    @Expose
+    private String fotoMhs;
+
+    @SerializedName("idMhs")
+    @Expose
+    private String idMhs;
+
+    @SerializedName("nim_progmob")
+    @Expose
+    private String nim;
+
+//public class Mahasiswa {
+//    private String nim;
+//    private String nama;
+//    private String emailMhs;
+//    private String alamatMhs;
+//    private int fotoMhs;
+
+    public Mahasiswa(String nim, String nama, String emailMhs, String alamatMhs, String fotoMhs) {
         this.nim = nim;
-        this.nama = nama;
+        this.namaMhs = nama;
         this.emailMhs = emailMhs;
         this.alamatMhs = alamatMhs;
         this.fotoMhs = fotoMhs;
+        this.idMhs = idMhs;
     }
 
     public String getNim() {
@@ -24,11 +54,11 @@ public class Mahasiswa {
     }
 
     public String getNama() {
-        return nama;
+        return namaMhs;
     }
 
     public void setNama(String nama) {
-        this.nama = nama;
+        this.namaMhs = nama;
     }
 
     public String getEmailMhs() {
@@ -47,11 +77,19 @@ public class Mahasiswa {
         this.alamatMhs = alamatMhs;
     }
 
-    public int getFotoMhs() {
+    public String getFotoMhs() {
         return fotoMhs;
     }
 
-    public void setFotoMhs(int fotoMhs) {
+    public void setFotoMhs(String fotoMhs) {
         this.fotoMhs = fotoMhs;
+    }
+
+    public String getIdMhs() {
+        return idMhs;
+    }
+
+    public void setId(String id) {
+        this.idMhs = id;
     }
 }
