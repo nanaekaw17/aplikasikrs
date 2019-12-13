@@ -92,4 +92,5 @@ public class Mahasiswa {
     public void setId(String id) {
         this.idMhs = id;
     }
+
 }
