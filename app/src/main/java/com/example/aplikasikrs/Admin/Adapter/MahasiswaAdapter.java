@@ -44,9 +44,9 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
         holder.txtEmailMhs.setText(dataList.get(position).getEmailMhs());
         holder.imgFoto.getLayoutParams().width = 200;
         holder.imgFoto.getLayoutParams().height = 200;
-        if(dataList.get(position).getFotoMhs() != null){
+        if(dataList.get(position).getFoto() != null){
             Picasso.with(this.context)
-                    .load("https://kpsi.fti.ukdw.ac.id/progmob/"+dataList.get(position).getFotoMhs())
+                    .load("https://kpsi.fti.ukdw.ac.id/progmob/"+dataList.get(position).getFoto())
                     .into(holder.imgFoto);
         }
         /*holder.itemView.setOnClickListener(new View.OnClickListener() {

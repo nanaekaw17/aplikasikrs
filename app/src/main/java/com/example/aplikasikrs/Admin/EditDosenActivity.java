@@ -63,9 +63,9 @@ public class EditDosenActivity extends AppCompatActivity {
     private void requestUpdateDosen(){
         edtId = (EditText)findViewById(R.id.edtIdDosen);
         edtNama = (EditText)findViewById(R.id.edtNamaMhs);
-        edtNidn = (EditText)findViewById(R.id.edtNim);
+        edtNidn = (EditText)findViewById(R.id.edtNidn);
         edtAlamat = (EditText)findViewById(R.id.edtAlamatMhs);
-        edtEmail = (EditText)findViewById(R.id.edtEmailMhs);
+        edtEmail = (EditText)findViewById(R.id.edtEmailDsn);
         edtGelar = (EditText)findViewById(R.id.edtGelar);
 
         edtId.setText(mIntent.getStringExtra("id"));

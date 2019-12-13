@@ -79,7 +79,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edtNim"
+        android:id="@+id/edtNidn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -91,7 +91,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edtNamaMhs" />
 
     <EditText
-        android:id="@+id/edtEmailMhs"
+        android:id="@+id/edtEmailDsn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
@@ -112,7 +112,7 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmailMhs" />
+        app:layout_constraintTop_toBottomOf="@+id/edtEmailDsn" />
 
     <EditText
         android:id="@+id/edtAlamatMhs"
@@ -124,7 +124,7 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/edtNim" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNidn" />
 
     <Button
         android:id="@+id/btnBrowseFotoMhs"

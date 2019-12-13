@@ -67,39 +67,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/messageTextInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/edtNamaDsn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordTextInputEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-<!--    <EditText-->
-
-<!--        android:id="@+id/edtNamaDsn"-->
-<!--        style="@android:style/Widget.Material.EditText"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="18dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:ems="10"-->
-<!--        android:inputType="textPersonName"-->
-<!--        android:textSize="14sp"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/textView14"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edtNim"
+        android:id="@+id/edtNidn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -108,10 +89,10 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/edtNamaMhs" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNamaDsn" />
 
     <EditText
-        android:id="@+id/edtEmailMhs"
+        android:id="@+id/edtEmailDsn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
@@ -120,7 +101,7 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/edtAlamatMhs" />
+        app:layout_constraintTop_toBottomOf="@+id/edtAlamatDsn" />
 
     <EditText
         android:id="@+id/edtGelar"
@@ -132,10 +113,10 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmailMhs" />
+        app:layout_constraintTop_toBottomOf="@+id/edtEmailDsn" />
 
     <EditText
-        android:id="@+id/edtAlamatMhs"
+        android:id="@+id/edtAlamatDsn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -144,10 +125,10 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/edtNim" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNidn" />
 
     <Button
-        android:id="@+id/btnBrowseFotoMhs"
+        android:id="@+id/btnBrowseFotoDosen"
         android:layout_width="82dp"
         android:layout_height="33dp"
         android:layout_marginStart="72dp"
@@ -155,10 +136,10 @@
         android:text="@string/browse"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtFotoMhs" />
+        app:layout_constraintTop_toBottomOf="@+id/edtFoto" />
 
     <Button
-        android:id="@+id/btnSimpanDataMhs"
+        android:id="@+id/btnSimpanDosen"
         android:layout_width="196dp"
         android:layout_height="35dp"
         android:layout_marginTop="52dp"
@@ -167,10 +148,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBrowseFotoMhs" />
+        app:layout_constraintTop_toBottomOf="@+id/btnBrowseFotoDosen" />
 
     <EditText
-        android:id="@+id/edtFotoMhs"
+        android:id="@+id/edtFoto"
         android:layout_width="175dp"
         android:layout_height="46dp"
         android:layout_marginStart="28dp"
@@ -181,14 +162,24 @@
         app:layout_constraintTop_toBottomOf="@+id/edtGelar" />
 
     <ImageView
-        android:id="@+id/imgFotoMhs"
-        android:layout_width="147dp"
-        android:layout_height="124dp"
+        android:id="@+id/imgFotoDosenPre"
+        android:layout_width="230dp"
+        android:layout_height="200dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSimpanDataMhs"
+        app:layout_constraintTop_toBottomOf="@+id/btnSimpanDosen"
         app:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
+        android:text="Preview :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSimpanDosen" />
 </androidx.constraintlayout.widget.ConstraintLayout>

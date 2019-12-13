@@ -1,11 +1,11 @@
 package com.example.aplikasikrs.Admin;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,13 +16,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.aplikasikrs.Network.DefaultResult;
 import com.example.aplikasikrs.Network.GetDataService;
 import com.example.aplikasikrs.Network.RetrofitClientInstance;
 import com.example.aplikasikrs.R;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -30,6 +33,8 @@ import java.io.IOException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class CreateDosenActivity extends AppCompatActivity {
 
@@ -42,6 +47,7 @@ public class CreateDosenActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     Bitmap bitmap;
     static final int IMG_REQ = 777;
+    static final int FILE_ACCESS_REQUEST_CODE = 777;
     byte[] imagByte;
 
     @Override
@@ -49,14 +55,22 @@ public class CreateDosenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_dosen);
         this.setTitle("SI KRS - Hai Admin");
-        edtNama = (EditText)findViewById(R.id.edtNamaMhs);
-        edtNidn = (EditText)findViewById(R.id.edtNim);
-        edtAlamat = (EditText)findViewById(R.id.edtAlamatMhs);
-        edtEmail = (EditText)findViewById(R.id.edtEmailMhs);
+
+        if (ActivityCompat.checkSelfPermission(CreateDosenActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(CreateDosenActivity.this,new String[]{
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+            }, FILE_ACCESS_REQUEST_CODE);
+        }
+
+
+        edtNama = (EditText)findViewById(R.id.edtNamaDsn);
+        edtNidn = (EditText)findViewById(R.id.edtNidn);
+        edtAlamat = (EditText)findViewById(R.id.edtAlamatDsn);
+        edtEmail = (EditText)findViewById(R.id.edtEmailDsn);
         edtGelar = (EditText)findViewById(R.id.edtGelar);
-        edtFoto = (EditText)findViewById(R.id.edtFotoMhs);
-        imgFoto = (ImageView)findViewById(R.id.imgFotoMhs);
-        btnBrowse = (Button)findViewById(R.id.btnBrowseFotoMhs);
+        edtFoto = (EditText)findViewById(R.id.edtFoto );
+        imgFoto = (ImageView)findViewById(R.id.imgFotoDosenPre);
+        btnBrowse = (Button)findViewById(R.id.btnBrowseFotoDosen);
 
         checkUpdate();
 //        Button btnDaftarKrs = (Button)findViewById(R.id.btnSimpanDosen);
@@ -68,7 +82,7 @@ public class CreateDosenActivity extends AppCompatActivity {
 //            }
 //        });
 
-        btnSave = (Button)findViewById(R.id.btnSimpanDataMhs);
+        btnSave = (Button)findViewById(R.id.btnSimpanDosen);
         if(isUpdate){
             btnSave.setText("Update");
         }
@@ -229,10 +243,12 @@ public class CreateDosenActivity extends AppCompatActivity {
         edtGelar.setText(extras.getString("gelar"));
         //edtFoto.setText(extras.getString("foto"));
 
-        imagByte = Base64.decode(extras.getString("foto"), Base64.DEFAULT);
+        /*imagByte = Base64.decode(extras.getString("foto"), Base64.DEFAULT);
         Bitmap decodedImage = BitmapFactory.decodeByteArray(imagByte, 0, imagByte.length);
-        imgFoto.setImageBitmap(decodedImage);
-
+        imgFoto.setImageBitmap(decodedImage);*/
+        Picasso.with(CreateDosenActivity.this)
+                .load("https://kpsi.fti.ukdw.ac.id/progmob/" + extras.getString("foto"))
+                .into(imgFoto);
 
 
     }
@@ -240,6 +256,10 @@ public class CreateDosenActivity extends AppCompatActivity {
     private void selectImage(){
         Intent intent = new Intent();
         intent.setType("image/*");
+        //Setimage jpeg
+        String[] mimeTypes = {"image/jpeg"};
+        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, IMG_REQ);
     }
@@ -267,5 +287,15 @@ public class CreateDosenActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         imagByte = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imagByte, Base64.DEFAULT);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case FILE_ACCESS_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED){
+                    //
+                }
+                break;
+        }
     }
 }

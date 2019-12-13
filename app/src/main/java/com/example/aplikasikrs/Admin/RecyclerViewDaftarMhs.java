@@ -1,5 +1,6 @@
 package com.example.aplikasikrs.Admin;
 
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,39 +34,15 @@ public class RecyclerViewDaftarMhs extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menucreate,menu);
-        return true;
-    }
-
-    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if(item.getItemId()==R.id.menu1){
-//            Intent intent = new Intent(RecyclerViewDaftarMhs.this,CreateMhsActivity.class);
-//            startActivity(intent);
-//        }
-//        return  true;
-//    }
-
-
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.menu1){
-            Intent intent = new Intent(RecyclerViewDaftarMhs.this,CreateMhsActivity.class);
-            startActivity(intent);
-        }
-        return  true;
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view_daftar_mhs);
         this.setTitle("SI KRS - Hai Admin");
-
-        recyclerView = (RecyclerView)findViewById(R.id.rvMhs);
         //tambahData();
-        //addData
+
+        recyclerView = findViewById(R.id.rvMhs);
+        //mhsAdapter = new MahasiswaAdapter(mhsList);
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
@@ -93,7 +70,23 @@ public class RecyclerViewDaftarMhs extends AppCompatActivity {
         });
 
         registerForContextMenu(recyclerView);
+    }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menucreate,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.menu1){
+            Intent intent = new Intent(RecyclerViewDaftarMhs.this,CreateMhsActivity.class);
+            startActivity(intent);
+        }
+        return  true;
     }
 
     @Override
@@ -101,12 +94,12 @@ public class RecyclerViewDaftarMhs extends AppCompatActivity {
         Mahasiswa mahasiswa = mahasiswaList.get(item.getGroupId());
         if (item.getTitle()== "Ubah Data Mhs"){
             Intent intent = new Intent(RecyclerViewDaftarMhs.this, CreateDosenActivity.class);
-            intent.putExtra("id_mahasiswa",mahasiswa.getIdMhs()); //(key, value) -> ketika manggil Mhs harus sama
+            intent.putExtra("id_mahasiswa",mahasiswa.getId()); //(key, value) -> ketika manggil Mhs harus sama
             intent.putExtra("nama",mahasiswa.getNama());
             intent.putExtra("nim",mahasiswa.getNim());
             intent.putExtra("alamat",mahasiswa.getAlamatMhs());
             intent.putExtra("email",mahasiswa.getEmailMhs());
-            intent.putExtra("foto",mahasiswa.getFotoMhs());
+            intent.putExtra("foto",mahasiswa.getFoto());
             intent.putExtra("is_update",true);
             startActivity(intent);
 
@@ -118,7 +111,7 @@ public class RecyclerViewDaftarMhs extends AppCompatActivity {
 
             GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
             Call<DefaultResult> call = service.delete_dosen(
-                    mahasiswa.getIdMhs(), "72170090");
+                    mahasiswa.getId(), "72170090");
             call.enqueue(new Callback<DefaultResult>() {
                 @Override
                 public void onResponse(Call<DefaultResult> call, Response<DefaultResult> response) {

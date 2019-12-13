@@ -25,14 +25,7 @@ public interface GetDataService {
 
     );
 
-    @FormUrlEncoded
-    @POST("api/progmob/mahasiswa/deletemhs")
-    Call<DefaultResult> delete_mhs(
-            @Field("idMhs") String idMhs,
-            @Field("nim_progmob") String nim_progmob
 
-
-    );
 
 
     @GET("/api/progmob/dosen/{nim_progmob}")
@@ -88,56 +81,65 @@ public interface GetDataService {
     );
     @GET("/api/progmob/mahasiswa/{nim_progmob}")
     Call<ArrayList<Mahasiswa>> getMahasiswaAll(@Path("nim_progmob") String nim_progmob);
-    //Call<List<Dosen>> getDosenAll(@Query("nim_progmob") String nim_progmob);
+    //Call<List<Dosen>> getMahasiswaAll(@Query("nim_progmob") String nim_progmob);
 
+    @FormUrlEncoded
+    @POST("api/progmob/mahasiswa/delete")
+    Call<DefaultResult> delete_mhs(
+            @Field("idM") String idMhs,
+            @Field("nim_progmob") String nim_progmob
+
+
+    );
     @FormUrlEncoded
     @POST("/api/progmob/mahasiswa/create")
     Call<DefaultResult> insert_mahasiswa(
-            @Field("nama") String namaMhs,
+            @Field("nama") String nama_mhs,
             @Field("nim") String nim,
-            @Field("alamat") String alamatMhs,
-            @Field("email") String emailMhs,
-            @Field("foto") String fotoMhs,
-            @Field("nim_progmob") String nim_progmob
+            @Field("alamat") String alamat_mhs,
+            @Field("email") String email_mhs,
+            @Field("foto") String foto_mhs,
+            @Field("nim_progmob") String nim_progmob_mhs
     );
-
-
-    @FormUrlEncoded
-    @POST("/api/progmob/mahasiswa/createfotoMhs")
-    Call<DefaultResult> insert_mahasiswa_foto(
-            @Field("nama") String namaMhs,
-            @Field("nim") String nim,
-            @Field("alamat") String alamatMhs,
-            @Field("email") String emailMhs,
-            @Field("foto") String fotoMhs,
-            @Field("nim_progmob") String nim_progmob
-    );
-
 
     @FormUrlEncoded
     @POST("api/progmob/mahasiswa/update")
     Call<DefaultResult> update_mahasiswa(
-            @Field("id") String id,
-            @Field("nama") String namaMhs,
+            @Field("id") String id_mhs,
+            @Field("nama") String nama_mhs,
             @Field("nim") String nim,
-            @Field("alamat") String alamatMhs,
-            @Field("email") String emailMhs,
-            @Field("foto") String fotoMhs,
-            @Field("nim_progmob") String nim_progmob
+            @Field("alamat") String alamat_mhs,
+            @Field("email") String email_mhs,
+            @Field("foto") String foto_mhs,
+            @Field("nim_progmob") String nim_progmob_mhs
     );
 
-    @FormUrlEncoded
-    @POST("api/progmob/mahasiswa/updatewithfoto")
-    Call<DefaultResult> update_mahasiswa_foto(
-            @Field("id") String id,
-            @Field("nama") String namaMhs,
-            @Field("nim") String nim,
-            @Field("alamat") String alamatMhs,
-            @Field("email") String emailMhs,
-            @Field("foto") String fotoMhs,
-            @Field("nim_progmob") String nim_progmob
-
-    );
+//    @FormUrlEncoded
+//    @POST("/api/progmob/mahasiswa/createfotoMhs")
+//    Call<DefaultResult> insert_mahasiswa_foto(
+//            @Field("nama") String namaMhs,
+//            @Field("nim") String nim,
+//            @Field("alamat") String alamatMhs,
+//            @Field("email") String emailMhs,
+//            @Field("foto") String fotoMhs,
+//            @Field("nim_progmob") String nim_progmob
+//    );
+//
+//
+//
+//
+//    @FormUrlEncoded
+//    @POST("api/progmob/mahasiswa/updatewithfoto")
+//    Call<DefaultResult> update_mahasiswa_foto(
+//            @Field("id") String id,
+//            @Field("nama") String namaMhs,
+//            @Field("nim") String nim,
+//            @Field("alamat") String alamatMhs,
+//            @Field("email") String emailMhs,
+//            @Field("foto") String fotoMhs,
+//            @Field("nim_progmob") String nim_progmob
+//
+//    );
 
     /*@FormUrlEncoded
     @POST("/si_mapping/api/user_login.php")

@@ -5,9 +5,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class Mahasiswa {
 
+    @SerializedName("nim")
+    @Expose
+    private String nim;
+
     @SerializedName("nama")
     @Expose
-    private String namaMhs;
+    private String nama;
 
     @SerializedName("email")
     @Expose
@@ -19,15 +23,15 @@ public class Mahasiswa {
 
     @SerializedName("foto")
     @Expose
-    private String fotoMhs;
+    private String foto;
 
-    @SerializedName("idMhs")
+    @SerializedName("id")
     @Expose
-    private String idMhs;
+    private String id;
 
     @SerializedName("nim_progmob")
     @Expose
-    private String nim;
+    private String nim_progmob;
 
 //public class Mahasiswa {
 //    private String nim;
@@ -38,11 +42,12 @@ public class Mahasiswa {
 
     public Mahasiswa(String nim, String nama, String emailMhs, String alamatMhs, String fotoMhs) {
         this.nim = nim;
-        this.namaMhs = nama;
+        this.nama = nama;
         this.emailMhs = emailMhs;
         this.alamatMhs = alamatMhs;
-        this.fotoMhs = fotoMhs;
-        this.idMhs = idMhs;
+        this.foto = foto;
+        this.id = id;
+        this.nim_progmob = nim_progmob;
     }
 
     public String getNim() {
@@ -54,11 +59,11 @@ public class Mahasiswa {
     }
 
     public String getNama() {
-        return namaMhs;
+        return nama;
     }
 
     public void setNama(String nama) {
-        this.namaMhs = nama;
+        this.nama = nama;
     }
 
     public String getEmailMhs() {
@@ -77,20 +82,27 @@ public class Mahasiswa {
         this.alamatMhs = alamatMhs;
     }
 
-    public String getFotoMhs() {
-        return fotoMhs;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setFotoMhs(String fotoMhs) {
-        this.fotoMhs = fotoMhs;
+    public void setFoto(String fotoMhs) {
+        this.foto = fotoMhs;
     }
 
-    public String getIdMhs() {
-        return idMhs;
+    public String getId() {
+        return id;
     }
 
     public void setId(String id) {
-        this.idMhs = id;
+        this.id = id;
     }
 
+    public String getNim_progmob() {
+        return nim_progmob;
+    }
+
+    public void setNim_progmob(String nim_progmob) {
+        this.nim_progmob = nim_progmob;
+    }
 }

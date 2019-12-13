@@ -1,11 +1,16 @@
 package com.example.aplikasikrs.Admin;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,13 +21,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.aplikasikrs.Network.DefaultResult;
 import com.example.aplikasikrs.Network.GetDataService;
 import com.example.aplikasikrs.Network.RetrofitClientInstance;
 import com.example.aplikasikrs.R;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -31,17 +34,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
 public class CreateMhsActivity extends AppCompatActivity {
 
-    EditText edtNama, edtNim,edtAlamat,edtEmail;
+    EditText edtNama, edtNim ,edtAlamat,edtEmail;
     Button btnSave, btnBrowse;
     ImageView imgFoto;
     private Boolean isUpdate = false;
-    String idMhs ="", ImgMhs;
+    String idMhs ="", Img;
     GetDataService service;
     ProgressDialog progressDialog;
     Bitmap bitmap;
     static final int IMG_REQ = 777;
+    static final int FILE_ACCESS_REQUEST_CODE = 777;
     byte[] imagByte;
 
     @Override
@@ -49,24 +55,23 @@ public class CreateMhsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_mhs);
         this.setTitle("SI KRS - Hai Admin");
+
+        if (ActivityCompat.checkSelfPermission(CreateMhsActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(CreateMhsActivity.this,new String[]{
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+            }, FILE_ACCESS_REQUEST_CODE);
+        }
+
         edtNama = (EditText)findViewById(R.id.edtNamaMhs);
-        edtNim = (EditText)findViewById(R.id.edtNim);
+        edtNim = (EditText)findViewById(R.id.edtNimMhs);
         edtAlamat = (EditText)findViewById(R.id.edtAlamatMhs);
         edtEmail = (EditText)findViewById(R.id.edtEmailMhs);
-        imgFoto = (ImageView)findViewById(R.id.imgFotoMhs);
-        btnBrowse = (Button)findViewById(R.id.btnBrowseFotoMhs);
+        imgFoto = (ImageView)findViewById(R.id.imgFotoMahasiswaPre);
+        btnBrowse = (Button)findViewById(R.id.btnBrowseMhs);
 
         checkUpdate();
-//        Button btnDaftarKrs = (Button)findViewById(R.id.btnSimpanDosen);
-//        btnDaftarKrs.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(CreateDosenActivity.this, HomeAdmin.class);
-//                startActivity(intent);
-//            }
-//        });
 
-        btnSave = (Button)findViewById(R.id.btnSimpanDataMhs);
+        btnSave = (Button)findViewById(R.id.btnCreateMhs);
         if(isUpdate){
             btnSave.setText("Update");
         }
@@ -79,25 +84,24 @@ public class CreateMhsActivity extends AppCompatActivity {
                 //Validation
 
                 if(edtNama.getText().toString().matches("")){
-                    edtNama.setError("Silahkan mengisi Nama Mhs");
+                    edtNama.setError("Silahkan mengisi Nama Mahasiswa");
                     isValid = false;
                 }
 
                 if(edtNim.getText().toString().matches("")){
-                    edtNim.setError("Silahkan mengisi NIM Mhs");
+                    edtNim.setError("Silahkan mengisi NIM Mahasiswa");
                     isValid = false;
                 }
 
                 if(edtAlamat.getText().toString().matches("")){
-                    edtAlamat.setError("Silahkan mengisi Alamat Mhs");
+                    edtAlamat.setError("Silahkan mengisi Alamat Mahasiswa");
                     isValid = false;
                 }
 
                 if(edtEmail.getText().toString().matches("")){
-                    edtEmail.setError("Silahkan mengisi Email Mhs");
+                    edtEmail.setError("Silahkan mengisi Email Mahasiswa");
                     isValid = false;
                 }
-
 
                 if(!isUpdate){
                     if(isValid){
@@ -111,7 +115,7 @@ public class CreateMhsActivity extends AppCompatActivity {
                                 })
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        requestInsertDosen();
+                                        requestInsertMhs();
                                     }
                                 });
 
@@ -131,7 +135,7 @@ public class CreateMhsActivity extends AppCompatActivity {
                                 })
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        requestUpdateDosen();
+                                        requestUpdateMhs();
 
                                     }
                                 });
@@ -150,25 +154,31 @@ public class CreateMhsActivity extends AppCompatActivity {
         btnBrowse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 selectImage();
+
             }
         });
     }
 
-    private void requestInsertDosen(){
+    private void requestInsertMhs(){
         String gambar = imageToString();
         service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         progressDialog =  ProgressDialog.show(this, null, "Harap Tunggu...", true, false);
 
-        Call<DefaultResult> call =  service.insert_mahasiswa_foto(edtNama.getText().toString(),edtNim.getText().toString(),
-                edtAlamat.getText().toString(),edtEmail.getText().toString(),gambar,
+        Call<DefaultResult> call =  service.insert_mahasiswa(
+                edtNama.getText().toString(),
+                edtNim.getText().toString(),
+                edtAlamat.getText().toString(),
+                edtEmail.getText().toString(),
+                gambar,
                 "72170090");
         call.enqueue(new Callback<DefaultResult>() {
             @Override
             public void onResponse(Call<DefaultResult> call, Response<DefaultResult> response) {
                 progressDialog.dismiss();
                 Toast.makeText(CreateMhsActivity.this,"Berhasil Insert",Toast.LENGTH_LONG).show();
-                Intent refresh = new Intent(CreateMhsActivity.this, RecyclerViewDaftarDosen.class);
+                Intent refresh = new Intent(CreateMhsActivity.this, RecyclerViewDaftarMhs.class);
                 startActivity(refresh);
                 finish();
 
@@ -182,20 +192,20 @@ public class CreateMhsActivity extends AppCompatActivity {
         });
     }
 
-    private void requestUpdateDosen(){
+    private void requestUpdateMhs(){
         String gambar = imageToString();
         service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         progressDialog = ProgressDialog.show(CreateMhsActivity.this, null, "Harap Tunggu...", true, false);
 
         Call<DefaultResult> call = service.update_mahasiswa(idMhs, edtNama.getText().toString(), edtNim.getText().toString(),
-                edtAlamat.getText().toString(), edtEmail.getText().toString(),  gambar,
+                edtAlamat.getText().toString(), edtEmail.getText().toString(), gambar,
                 "72170090");
         call.enqueue(new Callback<DefaultResult>() {
             @Override
             public void onResponse(Call<DefaultResult> call, Response<DefaultResult> response) {
                 progressDialog.dismiss();
                 Toast.makeText(CreateMhsActivity.this, "Berhasil Update", Toast.LENGTH_LONG).show();
-                Intent refresh = new Intent(CreateMhsActivity.this, RecyclerViewDaftarDosen.class);
+                Intent refresh = new Intent(CreateMhsActivity.this, RecyclerViewDaftarMhs.class);
                 startActivity(refresh);
                 finish();
 
@@ -216,16 +226,19 @@ public class CreateMhsActivity extends AppCompatActivity {
         }
 
         isUpdate = extras.getBoolean("is_update");
-        idMhs = extras.getString("id_dosen");
-        edtNama.setText(extras.getString("nama"));
-        edtNim.setText(extras.getString("nidn"));
-        edtAlamat.setText(extras.getString("alamat"));
-        edtEmail.setText(extras.getString("email"));
+        idMhs = extras.getString("id_mhs");
+        edtNama.setText(extras.getString("nama_mhs"));
+        edtNim.setText(extras.getString("nim"));
+        edtAlamat.setText(extras.getString("alamat_mhs"));
+        edtEmail.setText(extras.getString("email_mhs"));
         //edtFoto.setText(extras.getString("foto"));
 
-        imagByte = Base64.decode(extras.getString("foto"), Base64.DEFAULT);
+        /*imagByte = Base64.decode(extras.getString("foto"), Base64.DEFAULT);
         Bitmap decodedImage = BitmapFactory.decodeByteArray(imagByte, 0, imagByte.length);
-        imgFoto.setImageBitmap(decodedImage);
+        imgFoto.setImageBitmap(decodedImage);*/
+        Picasso.with(CreateMhsActivity.this)
+                .load("https://kpsi.fti.ukdw.ac.id/progmob/" + extras.getString("foto_mhs"))
+                .into(imgFoto);
 
 
 
@@ -234,6 +247,10 @@ public class CreateMhsActivity extends AppCompatActivity {
     private void selectImage(){
         Intent intent = new Intent();
         intent.setType("image/*");
+        //Setimage jpeg
+        String[] mimeTypes = {"image/jpeg"};
+        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, IMG_REQ);
     }
@@ -261,5 +278,16 @@ public class CreateMhsActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         imagByte = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imagByte, Base64.DEFAULT);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case FILE_ACCESS_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED){
+                    //
+                }
+                break;
+        }
     }
 }
